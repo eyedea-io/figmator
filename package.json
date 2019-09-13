@@ -1,0 +1,51 @@
+{
+  "name": "@smashing/figmator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "npm run build-package",
+    "build-package": "tsc -b",
+    "watch": "tsc -b --watch"
+  },
+  "bin": {
+    "@smashing/figmator": "bin/figmator"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyedea-io/figmator.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "Eyedea AS",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/eyedea-io/figmator/issues"
+  },
+  "homepage": "https://github.com/eyedea-io/figmator#readme",
+  "dependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/debug": "^4.1.5",
+    "@types/fs-extra": "^8.0.0",
+    "@types/node": "^12.7.4",
+    "@types/node-fetch": "^2.5.0",
+    "@types/prompts": "^2.0.1",
+    "@types/yargs": "^13.0.2",
+    "case": "^1.6.2",
+    "chalk": "^2.4.2",
+    "debug": "^4.1.1",
+    "deepmerge": "^4.0.0",
+    "esm": "^3.2.25",
+    "fs-extra": "^8.1.0",
+    "lodash.sortby": "^4.7.0",
+    "node-fetch": "^2.6.0",
+    "prompts": "^2.2.1",
+    "typescript": "^3.6.2",
+    "yargs": "^14.0.0"
+  }
+}

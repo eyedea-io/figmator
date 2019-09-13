@@ -1,0 +1,3 @@
+{
+  "ignorePaths": [".", "src", "dist", "node_modules"]
+}
