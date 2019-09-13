@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as convert from "./convert";
 import { ConvertOptions } from "./types";
 import {
@@ -30,3 +32,5 @@ export async function cli(args: any[]) {
 
   await convert.convert(convertOptions);
 }
+
+cli(process.argv);

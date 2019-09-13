@@ -1,16 +1,16 @@
 {
   "name": "@smashing/figmator",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "npm run build-package",
+    "prepublishOnly": "npm run build-package",
     "build-package": "tsc -b",
     "watch": "tsc -b --watch"
   },
   "bin": {
-    "@smashing/figmator": "bin/figmator"
+    "figmator": "dist/index.js"
   },
   "repository": {
     "type": "git",
