@@ -13,7 +13,7 @@ import {
 const defaultConvertOptions: ConvertOptions = {
   apiKey: "",
   fileId: "",
-  workspaceName: "app",
+  outputDir: "figma-output",
   templatesFile: ""
 };
 

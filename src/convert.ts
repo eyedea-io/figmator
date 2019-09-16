@@ -23,7 +23,7 @@ class ComponentGenerator {
   nodes: any;
   constructor(projectNodes: FigmaNode[], convertOptions: ConvertOptions) {
     this.config = {
-      srcDir: `workspaces/${convertOptions.workspaceName}`
+      srcDir: `${convertOptions.outputDir}`
     };
 
     this.nodes = projectNodes
@@ -199,7 +199,7 @@ export const convert = async (convertOptions: ConvertOptions) => {
 
     print`File ${
       convertOptions.fileId
-    } found, generating component tree in ${`/workspaces/${convertOptions.workspaceName}/`}`;
+    } found, generating component tree in ${`/${convertOptions.outputDir}/`}`;
 
     if (!symbolsNode) {
       throw new Error('Cant find "Symbols" page in the file!');

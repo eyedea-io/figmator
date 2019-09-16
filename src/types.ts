@@ -1,7 +1,7 @@
 export interface ConvertOptions {
   apiKey: string;
   fileId: string;
-  workspaceName: string;
+  outputDir: string;
   templatesFile: string;
 }
 

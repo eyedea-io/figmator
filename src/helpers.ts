@@ -18,7 +18,7 @@ export const getEnvOptions = () =>
   ({
     apiKey: process.env.FIGMATOR_API_KEY || "",
     fileId: process.env.FIGMATOR_FILE_ID || "",
-    workspaceName: process.env.FIGMATOR_WORKSPACE_NAME || "",
+    outputDir: process.env.FIGMATOR_OUTPUT_DIR || "",
     templatesFile: process.env.FIGMATOR_TEMPLATES_FILE || ""
   } as ConvertOptions);
 
@@ -26,7 +26,7 @@ export const getArgvOptions = () =>
   ({
     apiKey: (argv.apiKey as string) || "",
     fileId: (argv.fileId as string) || "",
-    workspaceName: (argv.workspaceName as string) || "",
+    outputDir: (argv.outputDir as string) || "",
     templatesFile: (argv.atemplatesFilepiKey as string) || ""
   } as ConvertOptions);
 
