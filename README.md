@@ -1,6 +1,6 @@
 # Figmator
 
-###### (part of [Smashing](asdfg) toolbox)
+###### (part of Smashing toolbox)
 
 Figmator is a tool for turning your Figma workspace into React component tree with Storybook entries generated. It requires your Figma project to contain specifically named parts, which in turn is being fetched using Figma API and transformed into beautiful page and component structure.
 
