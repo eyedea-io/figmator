@@ -1,51 +1,116 @@
 # Figmator
 
-## (part of Smashing toolbox)
+###### (part of [Smashing](asdfg) toolbox)
 
-> **[View Storybook](https://github.com/eyedea-io/smashing-ui/deployments?environment=storybook#activity-log)**
+Figmator is a tool for turning your Figma workspace into React component tree with Storybook entries generated. It requires your Figma project to contain specifically named parts, which in turn is being fetched using Figma API and transformed into beautiful page and component structure.
 
 ## Getting started
 
-**Install theme**
+**Preparing your Figma project**
+
+Inside your Figma file, you should create a page named "Symbols". There, Figmator will search for all top-level entities are either **pages**, **components**, **subcomponents** or **component variants**. In order to be recognized, their names should match one of the following patterns:
+
+```
+page/PAGE_NAME
+page/PAGE_NAME/SUBCOMPONENT_NAME
+component/COMPONENT_NAME
+component/COMPONENT_NAME/SUBCOMPONENT_NAME
+component/COMPONENT_NAME/|COMPONENT_VARIANT
+component/COMPONENT_NAME/SUBCOMPONENT_NAME/|SUBCOMPONENT_VARIANT
+```
+
+For instance, if you would have a following set of objects:
+
+```
+component/Footer
+component/Header
+component/Header/Logo
+page/LandingPage
+page/LandingPage/HeroSection
+page/LandingPage/HeroSection|SpecialPromotion
+page/LandingPage/Services
+```
+
+It would yield following folder structure:
+
+```
+|-- figma-output
+    |-- components
+    |   |-- footer
+    |   |   |-- footer.components.tsx
+    |   |   |-- footer.stories.tsx
+    |   |   |-- footer.styled.tsx
+    |   |   |-- footer.tsx
+    |   |   |-- index.tsx
+    |   |-- header
+    |   |   |-- header.components.tsx
+    |   |   |-- header.stories.tsx
+    |   |   |-- header.styled.tsx
+    |   |   |-- header.tsx
+    |   |   |-- index.tsx
+    |-- pages
+        |-- landing-page
+        |   |-- landing-page.components.tsx
+        |   |-- landing-page.stories.tsx
+        |   |-- landing-page.styled.tsx
+        |   |-- landing-page.tsx
+        |   |-- index.tsx
+```
+
+Worth noting:
+
+- After peeking into `header.components.tsx` / `header.styled.tsx`, you should be able to see entries for the `Logo` subcomponent.
+- Similarly, you should be able to see definitions for `HeroSection` and `Services` inside `landing-page.components.tsx` and `landing-page.styled.tsx`.
+- There should be a Storybook entry for `SpecialPromotion` variant in `HeroSection` subcomponent.
+
+**How to use the CLI**
 
 ```sh
-yarn add @smashing/theme
+# in your web application's working directory
+npx @smashing/figmator
 ```
 
-**Add Theme Provider**
+After running this command, you will be prompted to enter your Figma API KEY and your Figma's file ID.
 
-```tsx
-import { SmashingThemeProvider } from "@smashing/theme";
+> Note: you can get file ID by opening it in Figma's web application and extracting it from the URL: https://www.figma.com/file/**<PROJECT_ID>\*\*/project-name
 
-const App = () => <SmashingThemeProvider>{/* ... */}</SmashingThemeProvider>;
+```sh
+users-MacBook-Pro:f hubert$ npx @smashing/figmator
+-------------------------------------
+Figmator v.0.3.0
+Please use --help switch to get help.
+-------------------------------------
+✔ Please enter Figma API key … *****
+? Please enter Figma file ID › XYZ-123-ABC
+
 ```
 
-You can read more about [smashing theme provider](https://github.com/eyedea-io/smashing-ui/tree/master/packages/theme) to learn how to customize theme.
+Afterwards, the tool will attempt to extract your Figma file's structure (described above) and put the result in the output directory, which defaults to the `figma-output`. You can change it by using `--output-dir` flag:
 
-## Components
+```sh
+npx @smashing/figmator --output-dir=some/other/dir
+```
 
-### Core
+## License
 
-- **[Alert](https://github.com/eyedea-io/smashing-ui/tree/master/packages/alert)** - Component used to give feedback to the user about an action or state.
-- **[Avatar](https://github.com/eyedea-io/smashing-ui/tree/master/packages/avatar)** - Component used to represent users.
-- **[Button](https://github.com/eyedea-io/smashing-ui/tree/master/packages/button)** - Common button component
-- **[Dialog](https://github.com/eyedea-io/smashing-ui/tree/master/packages/dialog)** - Component is used to show content on top of an overlay.
-- **[Menu](https://github.com/eyedea-io/smashing-ui/tree/master/packages/menu)** - Multiple components that help create menus.
-- **[Popover](https://github.com/eyedea-io/smashing-ui/tree/master/packages/popover)** - Component displays floating content in relation to a target.
-- **[Select](https://github.com/eyedea-io/smashing-ui/tree/master/packages/select)** - Simple select component being an overlay to a default system one.
-- **[TextInput](https://github.com/eyedea-io/smashing-ui/tree/master/packages/text-input)** - Text input component used in forms.
-- **[Tooltip](https://github.com/eyedea-io/smashing-ui/tree/master/packages/tooltip)** - Component used to describe icon buttons.
+MIT License
 
-### Typography
+Copyright (c) 2019 Eyedea
 
-- **[Text](https://github.com/eyedea-io/smashing-ui/tree/master/packages/typography)** - Inline text component.
-- **[Strong](https://github.com/eyedea-io/smashing-ui/tree/master/packages/typography)** - Bold variant of Text component.
-- **[Paragraph](https://github.com/eyedea-io/smashing-ui/tree/master/packages/typography)** - Component used for bigger chunks of texts.
-- **[Heading](https://github.com/eyedea-io/smashing-ui/tree/master/packages/typography)** - Component used for article and section titles.
-- **[Label](https://github.com/eyedea-io/smashing-ui/tree/master/packages/typography)** - Component used to describe form inputs.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-### Functional
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- **[Head](https://github.com/eyedea-io/smashing-ui/tree/master/packages/head)** - Manage page `<head>` tag content.
-- **[Title](https://github.com/eyedea-io/smashing-ui/tree/master/packages/title)** - Manage page `<title>` tag content.
-- **[css](https://github.com/eyedea-io/smashing-ui/tree/master/packages/css)** - Global css styles - normalize.css and reset.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
