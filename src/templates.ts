@@ -95,8 +95,9 @@ ${item.name}${
   )
   .join("\n\n")}
 
-function story(id: string) {
+function story(id: string, name?: string) {
   return {
+    name,
     parameters: {
       design: {
         type: 'figma',
